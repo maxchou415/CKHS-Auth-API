@@ -1,3 +1,5 @@
+# NOTICE
+Please change secret (config/default.js) before you do anything.
 # Usage
 ## Get Token
 ```POST /users/auth/```
