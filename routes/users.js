@@ -56,8 +56,6 @@ router.post('/auth', function(req, res, next) {
                              .update(tokenGen)
                              .digest('hex');
 
-//rh80uzg7TjWolIVwDe2X0BKDyTaKnj79
-
   User.findOne({'username': username, 'password': passwordHashed}, function(err, userAuth){
       if (err) {
         return done(err);
