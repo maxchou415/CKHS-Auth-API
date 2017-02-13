@@ -5,7 +5,7 @@
 #### Body:
 ```
 Content-Type: application/x-www-form-urlencoded
-Header: name, username, password
+Header: username, password
 ```
 #### Response:
 ```
