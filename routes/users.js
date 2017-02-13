@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var config = require('config');
+var randomstring = require('randomstring');
 
 var crypto = require('crypto');
 var secret = config.get('secret');
@@ -13,11 +14,13 @@ router.post('/auth', function(req, res, next) {
   var username = req.body.username
   var password = req.body.password
 
+  var tokenGen = randomstring.generate();
+
   var passwordHashed = crypto.createHmac('RSA-SHA512', secret)
                              .update(password)
                              .digest('hex');
   var tokenHashed    = crypto.createHmac('RSA-SHA512', secretForToken)
-                             .update(token)
+                             .update(tokenHashed)
                              .digest('hex');
 
   User.findOne({'username': username, 'password': passwordHashed}, function(err, userAuth){
@@ -36,7 +39,7 @@ router.post('/auth', function(req, res, next) {
       } else {
         User.update({token: tokenHashed}, {upsert: true}, function(err, userAuthFinalResult){
           if(err) { console.log(err) }
-          res.status(500).send({'message': userAuthFinalResult})
+          res.status(500).send({'token': tokenGen})
         })
       }
   })
