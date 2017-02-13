@@ -2,7 +2,7 @@
 Please change secret (config/default.js) before you do anything.
 
 # Security
-```Password``` and ```Token``` when save to Database.
+```Password``` and ```Token``` will be hash, when save to Database.
 
 # Usage
 ## Get Token
