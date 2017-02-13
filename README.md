@@ -46,7 +46,7 @@ Status Code: 200
 
 ```POST /users/auth/create"```
 
-#### Response:
+#### Body:
 ```
 Content-Type: application/json
 Status Code: 200
