@@ -1,5 +1,9 @@
 # NOTICE
 Please change secret (config/default.js) before you do anything.
+
+# Security
+```Password``` and ```Token``` will hash before save to Database.
+
 # Usage
 ## Get Token
 ```POST /users/auth/```
@@ -17,12 +21,12 @@ Status Code: 200
 #### Body:
 ```
 {
-  "message": "User Details (including token)"
+  "token": "sclJ9YsK2BfwuIwkbevka5Fswg1CuvjU"
 }
 ```
 
 ## Verifly Token
-```GET /users/auth/token="<token_here>"```
+```GET /users/auth/token/?token="<token_here>"```
 
 #### Response:
 ```
@@ -33,6 +37,34 @@ Status Code: 200
 #### Body:
 ```
 {
-  "message": "Auth Success", userAuthToken
+  "message": "Auth Success",
+  "token": "sclJ9YsK2BfwuIwkbevka5Fswg1CuvjU"
+}
+```
+
+## Create User
+
+```POST /users/auth/create"```
+
+#### Response:
+```
+Content-Type: application/json
+Status Code: 200
+```
+#### Body:
+```
+Content-Type: application/x-www-form-urlencoded
+Header: username, password, email, name
+```
+#### Response:
+```
+Content-Type: application/json
+Status Code: 200
+```
+#### Body:
+```
+{
+  "message": "Create User Success",
+  "token": "lHxK3xSfbBybzOxbAFjs7kvzLLttGt0F"
 }
 ```
