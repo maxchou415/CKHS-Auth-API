@@ -70,33 +70,36 @@ router.post('/auth', function(req, res, next) {
         res.status(401).send({'message': 'Auth Failed'})
         return
       } else {
-        User.update({token: tokenHashed}, {upsert: true}, function(err, userAuthFinalResult){
+        User.update({username: username}, {$set: { token: tokenHashed }}, {upsert: true}, function(err, userAuthFinalResult){
           if(err) { console.log(err) }
-          res.status(500).send({'token': tokenGen})
+          res.status(200).send({'token': tokenGen})
         })
       }
   })
 });
 
 //Auth By Token
-router.get('/auth/', function(req, res, next) {
+router.get('/auth/token/', function(req, res, next) {
   var token = req.query.token
 
   var tokenHashed = crypto.createHmac('RSA-SHA512', secretForToken)
                              .update(token)
                              .digest('hex');
 
-  User.findOne({'token': tokenHashed}, function(err, userAuthToken){
+  User.findOne({'token': tokenHashed}, function(err, userAuthByToken){
     if (err) {
       return done(err);
     }
 
-    if (!userAuthToken) {
+    if (!userAuthByToken) {
       res.status(401).send({'message': 'Auth Failed'})
       return
     }
 
-    res.status(500).send({'message': 'Auth Success', userAuthToken})
+    res.status(200).send({
+                            'message': 'Auth Success',
+                            'token': token
+                        })
   })
 });
 
