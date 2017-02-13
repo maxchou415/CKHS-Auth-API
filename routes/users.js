@@ -20,7 +20,7 @@ router.post('/auth', function(req, res, next) {
                              .update(token)
                              .digest('hex');
 
-  User.findOne({username: username, password: passwordHashed}, function(err, userAuth){
+  User.findOne({'username': username, 'password': passwordHashed}, function(err, userAuth){
       if (err) {
         return done(err);
       }
@@ -50,7 +50,7 @@ router.get('/auth/token', function(req, res, next) {
                              .update(token)
                              .digest('hex');
 
-  User.findOne({token: tokenHashed}, function(err, userAuthToken){
+  User.findOne({'token': tokenHashed}, function(err, userAuthToken){
     if (err) {
       return done(err);
     }
@@ -61,6 +61,7 @@ router.get('/auth/token', function(req, res, next) {
     }
 
     res.status(500).send({'message': 'Auth Success', userAuthToken})
-  )}
+  })
 });
+
 module.exports = router;

@@ -17,7 +17,7 @@ var UserSchema = new Schema({
 
     _id: { type: String, default: shortId.generate },
 
-    token: { type: String }
+    token: { type: String },
 
     created_at: { type: Date, default: Date.now }
 });
