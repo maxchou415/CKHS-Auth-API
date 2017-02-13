@@ -34,7 +34,7 @@ router.post('/auth', function(req, res, next) {
         res.status(401).send({'message': 'Auth Failed'})
         return
       } else {
-        User.update({token: tokenHashed}, function(err, userAuthFinalResult){
+        User.update({token: tokenHashed}, {upsert: true}, function(err, userAuthFinalResult){
           if(err) { console.log(err) }
           res.status(500).send({'message': userAuthFinalResult})
         })
