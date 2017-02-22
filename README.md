@@ -5,7 +5,7 @@ Please change secret (config/default.js) before you do anything.
 ```Password``` and ```Token``` will be hash, when save to Database.
 
 # Usage
-## Get Token
+## Get or Refresh Token
 ```POST /users/auth/```
 <br />
 #### Body:
